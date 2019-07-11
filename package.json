@@ -1,0 +1,38 @@
+{
+  "name": "@mhlabs/structured-loggin",
+  "version": "1.0.0",
+  "description": "A package for logging to console in a structured format",
+  "main": "index.js",
+  "jest": {
+    "collectCoverage": false,
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ]
+  },
+  "scripts": {
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "prepublishOnly": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mhlabs/structured-logging.git"
+  },
+  "author": "mhdev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mhlabs/structured-logging/issues"
+  },
+  "homepage": "https://github.com/mhlabs/structured-logging#readme",
+  "devDependencies": {
+    "jest": "^24.8.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-config-airbnb-base": "*",
+    "eslint-plugin-jest": "*",
+    "prettier": "^1.18.2"
+  },
+  "dependencies": {}
+}
