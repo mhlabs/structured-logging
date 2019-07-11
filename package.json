@@ -1,5 +1,5 @@
 {
-  "name": "@mhlabs/structured-loggin",
+  "name": "@mhlabs/structured-logging",
   "version": "1.0.0",
   "description": "A package for logging to console in a structured format",
   "main": "index.js",
