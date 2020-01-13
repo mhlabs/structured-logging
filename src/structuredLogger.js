@@ -6,7 +6,8 @@ function write(logData) {
   if (silentMode) {
     return;
   }
-  console.debug(logData);
+
+  process.stdout.write(`${logData}\n`);
 }
 
 function createLogObject(metadata) {
