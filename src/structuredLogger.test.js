@@ -1,7 +1,6 @@
 const StructuredLogger = require('./structuredLogger');
 
-const metadataKnown = ['entityid'];
-const logger = new StructuredLogger('virtual-test-stack', metadataKnown);
+const logger = new StructuredLogger('virtual-test-stack', {});
 
 logger.setSilentMode(true);
 
@@ -10,37 +9,54 @@ const metaData = {
 };
 
 test('Info log', () => {
-  const log = logger.info('You have been informed.', metaData);
+  const log = logger.info('My name is Bond, James Bond.', metaData);
   expect(log).toEqual(
-    '[INF] [{"Stack":"virtual-test-stack","entityId":"123"}]You have been informed.'
+    '{"Message":"My name is Bond, James Bond.","Level":"INFO","Metadata":{"entityId":"123","stack":"virtual-test-stack"}}'
   );
 });
 
 test('Warn log', () => {
-  const log = logger.warning('You have been warned.', metaData);
+  const log = logger.warn('My name is Bond, James Bond.', metaData);
   expect(log).toEqual(
-    '[WARN] [{"Stack":"virtual-test-stack","entityId":"123"}]You have been warned.'
-  );
-});
-
-test('Error log', () => {
-  const log = logger.error('You have been in error.', metaData);
-  expect(log).toEqual(
-    '[ERR] [{"Stack":"virtual-test-stack","entityId":"123"}]You have been in error.'
+    '{"Message":"My name is Bond, James Bond.","Level":"WARN","Metadata":{"entityId":"123","stack":"virtual-test-stack"}}'
   );
 });
 
 test('Debug log', () => {
-  const log = logger.debug('You have been debugged.', metaData);
+  const log = logger.debug('My name is Bond, James Bond.', metaData);
   expect(log).toEqual(
-    '[DEBUG] [{"Stack":"virtual-test-stack","entityId":"123"}]You have been debugged.'
+    '{"Message":"My name is Bond, James Bond.","Level":"DEBUG","Metadata":{"entityId":"123","stack":"virtual-test-stack"}}'
+  );
+});
+
+test('Error log', () => {
+  const log = logger.error('My name is Bond, James Bond.', metaData);
+  expect(log).toEqual(
+    '{"Message":"My name is Bond, James Bond.","Level":"ERROR","Metadata":{"entityId":"123","stack":"virtual-test-stack"}}'
+  );
+});
+
+test('Should handle metadata', () => {
+  const log = logger.debug('My name is Bond, James Bond.', {
+    memberId: 123,
+    orderId: 321
+  });
+  expect(log).toEqual(
+    '{"Message":"My name is Bond, James Bond.","Level":"DEBUG","Metadata":{"memberId":123,"orderId":321,"stack":"virtual-test-stack"}}'
   );
 });
 
 test('Should handle missing metadata', () => {
-  const log = logger.debug('You have been debugged.');
+  const log = logger.debug('My name is Bond, James Bond.');
   expect(log).toEqual(
-    '[DEBUG] [{"Stack":"virtual-test-stack"}]You have been debugged.'
+    '{"Message":"My name is Bond, James Bond.","Level":"DEBUG","Metadata":{"stack":"virtual-test-stack"}}'
+  );
+});
+
+test('Should handle non-object metadata', () => {
+  const log = logger.debug('My name is Bond, James Bond.', 'Mrs. Moneypenny');
+  expect(log).toEqual(
+    '{"Message":"My name is Bond, James Bond.","Level":"DEBUG","Metadata":{"stack":"virtual-test-stack"}}'
   );
 });
 

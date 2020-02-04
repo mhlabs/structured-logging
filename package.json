@@ -1,6 +1,6 @@
 {
   "name": "@mhlabs/structured-logging",
-  "version": "1.1.0",
+  "version": "2.0.0-alpha",
   "description": "A package for logging to console in a structured format",
   "main": "index.js",
   "jest": {
@@ -25,14 +25,15 @@
   },
   "homepage": "https://github.com/mhlabs/structured-logging#readme",
   "devDependencies": {
-    "jest": "^24.8.0",
-    "eslint": "^5.16.0",
-    "eslint-config-prettier": "^6.0.0",
-    "eslint-plugin-import": "^2.18.0",
-    "eslint-plugin-prettier": "^3.1.0",
-    "eslint-config-airbnb-base": "*",
-    "eslint-plugin-jest": "*",
-    "prettier": "^1.18.2"
+    "jest": "^25.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-config-airbnb-base": "14.0.0",
+    "eslint-plugin-jest": "23.6.0",
+    "prettier": "^1.19.1"
   },
-  "dependencies": {}
+  "dependencies": {
+  }
 }
