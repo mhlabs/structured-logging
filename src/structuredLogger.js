@@ -17,8 +17,15 @@ function createlogData(message, args, logLevel = 'INFO') {
   const data = {
     Message: message,
     Level: logLevel,
-    Metadata: metadata
+    Stack: stack
   };
+
+  Object.keys(metadata).forEach(key => {
+    if (!data[key]) {
+      data[key] = metadata[key];
+    }
+  });
+
   return JSON.stringify(data);
 }
 
@@ -59,7 +66,6 @@ const metric = message => {
 function StructuredLogger(stackName, options = {}) {
   stack = stackName;
   silentMode = false;
-  baseMetadata.stack = stack;
 
   this.setSilentMode = silent => {
     silentMode = silent;
