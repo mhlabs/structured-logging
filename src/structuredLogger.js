@@ -22,37 +22,37 @@ function createlogData(message, args, logLevel = 'INFO') {
   return JSON.stringify(data);
 }
 
-const info = (messageTemplate, metadata) => {
-  const logData = createlogData(messageTemplate, metadata, 'INFO');
+const info = (message, metadata) => {
+  const logData = createlogData(message, metadata, 'INFO');
   write(logData);
 
   return logData;
 };
 
-const warn = (messageTemplate, metadata) => {
-  const logData = createlogData(messageTemplate, metadata, 'WARN');
+const warn = (message, metadata) => {
+  const logData = createlogData(message, metadata, 'WARN');
   write(logData);
 
   return logData;
 };
 
-const error = (messageTemplate, metadata) => {
-  const logData = createlogData(messageTemplate, metadata, 'ERROR');
+const error = (message, metadata) => {
+  const logData = createlogData(message, metadata, 'ERROR');
   write(logData);
 
   return logData;
 };
 
-const debug = (messageTemplate, metadata) => {
-  const logData = createlogData(messageTemplate, metadata, 'DEBUG');
+const debug = (message, metadata) => {
+  const logData = createlogData(message, metadata, 'DEBUG');
   write(logData);
 
   return logData;
 };
 
-const metric = messageTemplate => {
-  write(messageTemplate);
-  return messageTemplate;
+const metric = message => {
+  write(message);
+  return message;
 };
 
 // eslint-disable-next-line no-unused-vars
