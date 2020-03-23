@@ -59,8 +59,3 @@ test('Should handle non-object metadata', () => {
     '{"Message":"My name is Bond, James Bond.","Level":"DEBUG","Stack":"virtual-test-stack"}'
   );
 });
-
-test('Should write metric string as is', () => {
-  const log = logger.metric('metric 123 xy.');
-  expect(log).toEqual('metric 123 xy.');
-});

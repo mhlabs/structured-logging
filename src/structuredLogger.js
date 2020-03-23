@@ -57,11 +57,6 @@ const debug = (message, metadata) => {
   return logData;
 };
 
-const metric = message => {
-  write(message);
-  return message;
-};
-
 // eslint-disable-next-line no-unused-vars
 function StructuredLogger(stackName, options = {}) {
   stack = stackName;
@@ -74,7 +69,6 @@ function StructuredLogger(stackName, options = {}) {
   this.debug = debug;
   this.error = error;
   this.info = info;
-  this.metric = metric;
   this.warn = warn;
 }
 
