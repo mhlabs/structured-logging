@@ -1,6 +1,6 @@
 {
   "name": "@mhlabs/structured-logging",
-  "version": "2.0.1-alpha",
+  "version": "2.0.1",
   "description": "A package for logging to console in a structured format",
   "main": "index.js",
   "jest": {
