@@ -1,5 +1,6 @@
 let stack = 'default-stack';
 let silentMode = false;
+const globalMetadata = {};
 
 function write(logData) {
   if (silentMode) {
@@ -11,7 +12,7 @@ function write(logData) {
 
 function createlogData(message, args, logLevel, baseMetadata) {
   const safeArgs = args instanceof Object ? args : {};
-  const metadata = { ...safeArgs, ...baseMetadata };
+  const metadata = { ...safeArgs, ...baseMetadata, ...globalMetadata };
 
   const data = {
     Message: message,
@@ -63,6 +64,10 @@ function StructuredLogger(stackName) {
 
   this.pushProperty = (name, value) => {
     baseMetadata[name] = value;
+  };
+
+  this.pushGlobalProperty = (name, value) => {
+    globalMetadata[name] = value;
   };
 
   this.setSilentMode = (silent) => {
