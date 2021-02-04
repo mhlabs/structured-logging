@@ -1,6 +1,5 @@
 let stack = 'default-stack';
 let silentMode = false;
-const baseMetadata = {};
 
 function write(logData) {
   if (silentMode) {
@@ -10,9 +9,9 @@ function write(logData) {
   process.stdout.write(`${logData}\n`);
 }
 
-function createlogData(message, args, logLevel = 'INFO') {
+function createlogData(message, args, logLevel, baseMetadata) {
   const safeArgs = args instanceof Object ? args : {};
-  const metadata = Object.assign(safeArgs || {}, baseMetadata);
+  const metadata = { ...safeArgs, ...baseMetadata };
 
   const data = {
     Message: message,
@@ -20,7 +19,7 @@ function createlogData(message, args, logLevel = 'INFO') {
     Stack: stack
   };
 
-  Object.keys(metadata).forEach(key => {
+  Object.keys(metadata).forEach((key) => {
     if (!data[key]) {
       data[key] = metadata[key];
     }
@@ -29,47 +28,51 @@ function createlogData(message, args, logLevel = 'INFO') {
   return JSON.stringify(data);
 }
 
-const info = (message, metadata) => {
-  const logData = createlogData(message, metadata, 'INFO');
+const info = (message, metadata, baseMetadata) => {
+  const logData = createlogData(message, metadata, 'INFO', baseMetadata);
   write(logData);
 
   return logData;
 };
 
-const warn = (message, metadata) => {
-  const logData = createlogData(message, metadata, 'WARN');
+const warn = (message, metadata, baseMetadata) => {
+  const logData = createlogData(message, metadata, 'WARN', baseMetadata);
   write(logData);
 
   return logData;
 };
 
-const error = (message, metadata) => {
-  const logData = createlogData(message, metadata, 'ERROR');
+const error = (message, metadata, baseMetadata) => {
+  const logData = createlogData(message, metadata, 'ERROR', baseMetadata);
   write(logData);
 
   return logData;
 };
 
-const debug = (message, metadata) => {
-  const logData = createlogData(message, metadata, 'DEBUG');
+const debug = (message, metadata, baseMetadata) => {
+  const logData = createlogData(message, metadata, 'DEBUG', baseMetadata);
   write(logData);
 
   return logData;
 };
 
-// eslint-disable-next-line no-unused-vars
-function StructuredLogger(stackName, options = {}) {
+function StructuredLogger(stackName) {
   stack = stackName;
   silentMode = false;
+  const baseMetadata = {};
 
-  this.setSilentMode = silent => {
+  this.pushProperty = (name, value) => {
+    baseMetadata[name] = value;
+  };
+
+  this.setSilentMode = (silent) => {
     silentMode = silent;
   };
 
-  this.debug = debug;
-  this.error = error;
-  this.info = info;
-  this.warn = warn;
+  this.debug = (message, metadata) => debug(message, metadata, baseMetadata);
+  this.error = (message, metadata) => error(message, metadata, baseMetadata);
+  this.info = (message, metadata) => info(message, metadata, baseMetadata);
+  this.warn = (message, metadata) => warn(message, metadata, baseMetadata);
 }
 
 module.exports = StructuredLogger;

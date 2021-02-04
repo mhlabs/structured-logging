@@ -4,7 +4,9 @@
     "node": true,
     "jest/globals": true
   },
-  "plugins": ["jest"],
+  "plugins": [
+    "jest"
+  ],
   "extends": [
     "plugin:jest/recommended",
     "airbnb-base",
@@ -29,7 +31,10 @@
         "classes": true
       }
     ],
-    "arrow-parens": ["error", "as-needed"],
+    "arrow-parens": [
+      "error",
+      "always"
+    ],
     "no-unused-vars": [
       "warn",
       {
